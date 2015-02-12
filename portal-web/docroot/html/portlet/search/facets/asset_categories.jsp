@@ -79,8 +79,9 @@ boolean showAssetCount = dataJSONObject.getBoolean("showAssetCount", true);
 			TermCollector termCollector = termCollectors.get(i);
 
 			long assetCategoryId = GetterUtil.getLong(termCollector.getTerm());
+			boolean userHasViewPermission = permissionChecker.hasPermission(scopeGroupId, "com.liferay.portlet.asset.model.AssetCategory", termCollector.getTerm(), "VIEW");
 
-			if (assetCategoryId == 0) {
+			if (assetCategoryId == 0 || !userHasViewPermission) {
 				continue;
 			}
 
